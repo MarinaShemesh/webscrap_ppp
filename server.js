@@ -11,11 +11,11 @@ url = 'https://www.publicdomainpictures.net/en/browse-author.php?a=15960';
 
 request(url, function(error,response,html){
   
-  if(!error) {
+  if(!error && response.statusCode == 200) {
 
     // utilize the cheerio library on the returned html which will 
     //essentially give us jQuery functionality
-     var $ = cheerio.load(html);
+     const $ = cheerio.load(html);
      
      //define the variables we want to capture
 
