@@ -19,25 +19,24 @@ request(url, function(error,response,html){
      
      //define the variables we want to capture
 
-     var downloads, picnumber, time;
-     var json = { downloads : "", picnumber : "", time: ""};
+     var downloads, picnumber, date;
+     var json = { downloads : "", picnumber : "", date: ""};
 
       $('.tab').filter(function(){
         
         var data = $(this);
 
         downloads = data.children().eq(1).text();
-    
         json.downloads = downloads;
 
         picnumber = data.children().eq(3).text();
-
         json.picnumber = picnumber;
 
         })
        
-       var time = timestamp('YYYY/MM/DD:mm:ss');//add timestamp
-       json.time = time;
+       var date = timestamp('YYYY:MM:DD');//add timestamp
+       json.date = date;
+
 
       }
 
@@ -51,8 +50,8 @@ request(url, function(error,response,html){
 
 })//end of get request
 
-app.listen('8088')
+app.listen('8080')
 
-console.log('Listening port 8088');
+console.log('Listening on port 8080');
 
 exports = module.exports = app;

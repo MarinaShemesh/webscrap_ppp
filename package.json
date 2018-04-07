@@ -7,6 +7,7 @@
   "dependencies": {
     "cheerio": "latest",
     "express": "latest",
+    "o-clock": "^0.1.2",
     "request": "latest",
     "time-stamp": "^2.0.0"
   }
