@@ -7,7 +7,10 @@ const app = express();
 
 app.get('/scrape', function(req, res){
 
-url = 'https://www.publicdomainpictures.net/en/browse-author.php?a=15960';
+mainUrl = 'https://www.publicdomainpictures.net/en/browse-author.php?a=';
+marinaID = '281';
+url = mainUrl + marinaID;
+
 
 request(url, function(error,response,html){
   
