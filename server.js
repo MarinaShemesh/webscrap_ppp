@@ -1,16 +1,14 @@
-const express = require('express');
 const fs = require('fs'); //gives access to our computer's file system
 const request = require('request');
 const cheerio = require('cheerio');//JQuery for node.js. makes iteasy to select, edit and view dom elements.
 const timestamp = require('time-stamp');
-const app = express();
-
-app.get('/scrape', function(req, res){
 
 mainUrl = 'https://www.publicdomainpictures.net/en/browse-author.php?a=';
-marinaID = '281';
+chaseID = '281';
+marinaID = '15960';
 url = mainUrl + marinaID;
 
+console.log("url:", url);
 
 request(url, function(error,response,html){
   
@@ -22,8 +20,8 @@ request(url, function(error,response,html){
      
      //define the variables we want to capture
 
-     var downloads, picnumber, date;
-     var json = { downloads : "", picnumber : "", date: ""};
+     var downloads, picnumber, date, hour, min, sec;
+     var json = { downloads : "", picnumber : "", date: "", hour:"", min:"", sec: ""};
 
       $('.tab').filter(function(){
         
@@ -37,9 +35,18 @@ request(url, function(error,response,html){
 
         })
        
-       var date = timestamp('YYYY:MM:DD');//add timestamp
+       var date = timestamp('YYYY/MM/DD');//add timestamp
        json.date = date;
 
+       var hour = timestamp('HH');
+       var min = timestamp('mm');
+       var sec = timestamp('ss');
+
+       json.hour = hour;
+       json.min = min;
+       json.sec = sec;
+       
+     
 
       }
 
@@ -47,14 +54,9 @@ request(url, function(error,response,html){
       console.log('File successfully written! Check the output.json file');
      })
 
-     res.send('The latest scrape is:')
 
   })//end of scrape request
 
-})//end of get request
 
-app.listen('8080')
 
-console.log('Listening on port 8080');
 
-exports = module.exports = app;
